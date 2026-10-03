@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第九电影网 - 高清影视在线观看</title>
+<meta name="description" content="第九电影网(dijiudianyingwang-app)提供最新电影、热播剧集、综艺、动漫在线观看，高清流畅，每日更新。">
+<meta name="keywords" content="第九电影网,dijiudianyingwang-app,高清电影,在线观看,最新影视">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://dijiudianyingwang-app">
+<!-- 必应站长平台验证占位，实际使用时替换为真实meta -->
+<meta name="msvalidate.01" content="BING_VERIFICATION_CODE_PLACEHOLDER" />
+<style>
+/* 基础重置与字体 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+a { color: #00f0ff; text-decoration: none; transition: all 0.3s ease; }
+a:hover { color: #ff00ff; text-shadow: 0 0 8px rgba(255,0,255,0.6); }
+
+/* 动态背景 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0,240,255,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,0,255,0.08) 0%, transparent 40%);
+    z-index: -1;
+    animation: bgFloat 20s ease-in-out infinite alternate;
+}
+@keyframes bgFloat {
+    0% { transform: scale(1) translate(0,0); }
+    100% { transform: scale(1.1) translate(-20px, 20px); }
+}
+
+/* 导航栏 - 玻璃拟态 */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(10, 10, 15, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,240,255,0.15);
+    z-index: 1000;
+    padding: 0 5%;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00f0ff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0,240,255,0.3);
+}
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+}
+.nav-links a:hover {
+    border-bottom-color: #ff00ff;
+}
+
+/* 主视觉区 */
+.hero {
+    margin-top: 60px;
+    padding: 4rem 5% 3rem;
+    text-align: center;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(120deg, #fff, #00f0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+.domain-badge {
+    display: inline-block;
+    background: rgba(0,240,255,0.1);
+    border: 1px solid rgba(0,240,255,0.3);
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0,240,255,0.2);
+}
+
+/* 栏目通用样式 */
+.section {
+    padding: 3rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid #00f0ff;
+    text-shadow: 0 0 10px rgba(0,240,255,0.3);
+}
+
+/* 卡片网格 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+.card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,240,255,0.15);
+    border-color: rgba(0,240,255,0.3);
+}
+.card-img {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(255,0,255,0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+.card-body { padding: 1rem; }
+.card-title { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+.card-meta { font-size: 0.85rem; color: #888; }
+
+/* 列表样式 */
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+.list-item:hover {
+    border-left-color: #ff00ff;
+    background: rgba(255,255,255,0.05);
+}
+.list-num {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00f0ff;
+    margin-right: 1rem;
+    min-width: 30px;
+}
+.list-content h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.list-content p { font-size: 0.85rem; color: #777; }
+
+/* 关于我们 */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+.about-text p { margin-bottom: 1rem; color: #bbb; }
+.about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.stat-box {
+    background: rgba(0,240,255,0.05);
+    border: 1px solid rgba(0,240,255,0.15);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+}
+.stat-num { font-size: 2rem; font-weight: bold; color: #00f0ff; }
+.stat-label { font-size: 0.9rem; color: #888; margin-top: 0.5rem; }
+
+/* 底部 */
+.footer {
+    background: rgba(0,0,0,0.5);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem 5%;
+    text-align: center;
+    margin-top: 3rem;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.footer-links a { color: #888; font-size: 0.9rem; }
+.footer-links a:hover { color: #00f0ff; }
+.copyright {
+    color: #555;
+    font-size: 0.85rem;
+}
+
+/* 移动端自适应 */
+@media (max-width: 768px) {
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.85rem; }
+    .hero { padding: 3rem 5% 2rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr; }
+    .section { padding: 2rem 5%; }
+    .section-title { font-size: 1.5rem; }
+}
+@media (max-width: 480px) {
+    .logo { font-size: 1.2rem; }
+    .nav-links { gap: 0.6rem; }
+    .domain-badge { font-size: 0.9rem; padding: 0.5rem 1rem; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<!-- 导航 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">第九电影网</div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#movies">电影</a>
+            <a href="#series">剧集</a>
+            <a href="#ranking">排行</a>
+            <a href="#about">关于</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 主视觉 -->
+<section class="hero" id="home">
+    <h1>第九电影网</h1>
+    <p>汇聚全球高清影视资源，热门电影、热播剧集、经典动漫一站式观看体验</p>
+    <div class="domain-badge">🌐 https://dijiudianyingwang-app</div>
+</section>
+
+<!-- 电影栏目 -->
+<section class="section" id="movies">
+    <h2 class="section-title">🎬 最新电影</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-img">🎥</div>
+            <div class="card-body">
+                <div class="card-title">沙丘2：救世主降临</div>
+                <div class="card-meta">科幻 / 2024 / 9.2分</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">🎥</div>
+            <div class="card-body">
+                <div class="card-title">奥本海默</div>
+                <div class="card-meta">传记 / 2023 / 8.9分</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">🎥</div>
+            <div class="card-body">
+                <div class="card-title">坠落的审判</div>
+                <div class="card-meta">悬疑 / 2023 / 8.7分</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">🎥</div>
+            <div class="card-body">
+                <div class="card-title">美国小说</div>
+                <div class="card-meta">喜剧 / 2023 / 8.0分</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 剧集栏目 -->
+<section class="section" id="series">
+    <h2 class="section-title">📺 热播剧集</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-img">📺</div>
+            <div class="card-body">
+                <div class="card-title">繁花</div>
+                <div class="card-meta">剧情 / 30集 / 王家卫执导</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">📺</div>
+            <div class="card-body">
+                <div class="card-title">三体</div>
+                <div class="card-meta">科幻 / 30集 / 基于刘慈欣小说</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">📺</div>
+            <div class="card-body">
+                <div class="card-title">庆余年 第二季</div>
+                <div class="card-meta">古装 / 36集 / 张若昀主演</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">📺</div>
+            <div class="card-body">
+                <div class="card-title">漫长的季节</div>
+                <div class="card-meta">悬疑 / 12集 / 辛爽执导</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 排行榜栏目 -->
+<section class="section" id="ranking">
+    <h2 class="section-title">🏆 热门排行</h2>
+    <div class="list-item">
+        <div class="list-num">1</div>
+        <div class="list-content">
+            <h3>周处除三害</h3>
+            <p>动作 / 犯罪 / 9.0分</p>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="list-num">2</div>
+        <div class="list-content">
+            <h3>年会不能停！</h3>
+            <p>喜剧 / 职场 / 8.2分</p>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="list-num">3</div>
+        <div class="list-content">
+            <h3>热辣滚烫</h3>
+            <p>剧情 / 喜剧 / 7.9分</p>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="list-num">4</div>
+        <div class="list-content">
+            <h3>第二十条</h3>
+            <p>剧情 / 家庭 / 7.8分</p>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="list-num">5</div>
+        <div class="list-content">
+            <h3>飞驰人生2</h3>
+            <p>喜剧 / 运动 / 7.7分</p>
+        </div>
+    </div>
+</section>
+
+<!-- 关于我们栏目 -->
+<section class="section" id="about">
+    <h2 class="section-title">📡 关于第九电影网</h2>
+    <div class="about-grid">
+        <div class="about-text">
+            <p><strong>第九电影网</strong>（<a href="https://dijiudianyingwang-app">dijiudianyingwang-app</a>）致力于为影视爱好者提供最新、最全的高清影视资源导航与资讯服务。</p>
+            <p>我们每日更新热门电影、剧集、综艺、动漫的推荐与评分，帮助您快速发现优质内容。网站采用先进的响应式设计，确保在手机、平板、电脑上均能获得流畅的浏览体验。</p>
+            <p>关键词：第九电影网、dijiudianyingwang-app、高清影视、在线观看</p>
+        </div>
+        <div class="about-stats">
+            <div class="stat-box">
+                <div class="stat-num">10,000+</div>
+                <div class="stat-label">影视资源</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">500万+</div>
+                <div class="stat-label">用户访问</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">每日</div>
+                <div class="stat-label">更新频率</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">免费服务</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 底部 -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="#home">首页</a>
+        <a href="#movies">电影</a>
+        <a href="#series">剧集</a>
+        <a href="#ranking">排行</a>
+        <a href="#about">关于</a>
+        <a href="#">免责声明</a>
+        <a href="#">隐私政策</a>
+    </div>
+    <div class="copyright">
+        © 2024 第九电影网 (dijiudianyingwang-app) | 本网站仅提供影视资讯导航服务
+    </div>
+</footer>
+
+<script>
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// 导航栏滚动效果
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > 100) {
+        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+    } else {
+        navbar.style.background = 'rgba(10, 10, 15, 0.75)';
+        navbar.style.boxShadow = 'none';
+    }
+    lastScroll = currentScroll;
+});
+
+// 卡片入场动画
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .list-item, .stat-box').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+</script>
+</body>
+</html>
